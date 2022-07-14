@@ -23,7 +23,8 @@ def get_contributing_predictions(page, repository_url):
                 predictions = model.predict(convert_paragraphs_into_features(paragraphs))
 
                 return paragraphs, predictions
-    except:
+    except Exception as e:
+        print(e)
         page.error("The URL provided does not refer to a public repository\
                    on GitHub with a valid contribution file.")
 
