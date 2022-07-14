@@ -1,0 +1,155 @@
+{"label": "GIT", "pattern": [{"LOWER": "git"}], "id": "git"}
+{"label": "GIT", "pattern": [{"LOWER": "commit"}], "id": "commit"}
+{"label": "GIT", "pattern": [{"LOWER": "committer"}], "id": "committer"}
+{"label": "GIT", "pattern": [{"LOWER": "branch"}], "id": "branch"}
+{"label": "GIT", "pattern": [{"LOWER": "rebase"}], "id": "rebase"}
+{"label": "GIT", "pattern": [{"LOWER": "diff"}], "id": "diff"}
+{"label": "GIT", "pattern": [{"LOWER": "checkout"}], "id": "checkout"}
+{"label": "GIT", "pattern": [{"LOWER": "sync"}], "id": "sync"}
+{"label": "GIT", "pattern": [{"LOWER": "master"}], "id": "master"}
+{"label": "GIT", "pattern": [{"LOWER": "origin"}], "id": "origin"}
+{"label": "GIT", "pattern": [{"LOWER": "upstream"}], "id": "upstream"}
+{"label": "GIT", "pattern": [{"LOWER": "status"}], "id": "status"}
+{"label": "GIT", "pattern": [{"LOWER": "revert"}], "id": "revert"}
+{"label": "GIT", "pattern": [{"LOWER": "log"}], "id": "log"}
+{"label": "GIT", "pattern": [{"LOWER": "fetch"}], "id": "fetch"}
+{"label": "GIT", "pattern": [{"LOWER": "author"}], "id": "author"}
+{"label": "GIT", "pattern": [{"LOWER": "message"}], "id": "message"}
+
+{"label": "TASK", "pattern": [{"LOWER": "fork"}], "id": "fork"}
+{"label": "TASK", "pattern": [{"LOWER": "issue"}], "id": "issue"}
+{"label": "TASK", "pattern": [{"LOWER": "tracker"}], "id": "issue-tracker"}
+{"label": "TASK", "pattern": [{"LOWER": "issue"}, {"LOWER": "tracker"}], "id": "issue-tracker"}
+{"label": "TASK", "pattern": [{"LOWER": "issue"}, {"IS_PUNCT": true}, {"LOWER": "tracker"}], "id": "issue-tracker"}
+{"label": "TASK", "pattern": [{"LOWER": "label"}], "id": "label"}
+{"label": "TASK", "pattern": [{"LOWER": "title"}], "id": "title"}
+
+{"label": "COMMUNITY", "pattern": [{"LOWER": "code"}, {"IS_STOP": true}, {"LOWER": "conduct"}], "id": "code-of-conduct"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "mailing"}, {"IS_PUNCT": true}, {"LOWER": "list"}], "id": "mailing-list"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "mailing"}, {"LOWER": "list"}], "id": "mailing-list"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "contact"}], "id": "contact"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "mail"}], "id": "email"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "email"}], "id": "email"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "e"}, {"IS_PUNCT": true}, {"LOWER": "mail"}], "id": "email"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "contact"}, {"LOWER": "us"}], "id": "contact"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "contact"}, {"IS_PUNCT": true}, {"LOWER": "us"}], "id": "contact"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "get"}, {"LOWER": "in"}, {"LOWER": "touch"}], "id": "contact"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "question"}], "id": "questions"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "questions"}], "id": "questions"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "slack"}], "id": "communication-channel"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "gitter"}], "id": "communication-channel"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "twitter"}], "id": "communication-channel"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "irc"}], "id": "communication-channel"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "irc"}], "id": "communication-channel"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "code"}, {"IS_STOP": true}, {"LOWER": "conduct"}], "id": "code-of-conduct"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "conduct"}], "id": "code-of-conduct"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "harassment"}], "id": "bad-behavior"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "troll"}], "id": "bad-behavior"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "insult"}], "id": "bad-behavior"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "sexualized"}, {"LOWER": "language"}], "id": "bad-behavior"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "sexual"}, {"LOWER": "attention"}], "id": "bad-behavior"}
+{"label": "COMMUNITY", "pattern": [{"LOWER": "political"}, {"LOWER": "attack"}], "id": "bad-behavior"}
+
+{"label": "CODE", "pattern": [{"LOWER": "snippet"}], "id": "snippet"}
+{"label": "CODE", "pattern": [{"LOWER": "code"}, {"LOWER": "snippet"}], "id": "snippet"}
+{"label": "CODE", "pattern": [{"LOWER": "linter"}], "id": "linter"}
+{"label": "CODE", "pattern": [{"LOWER": "lint"}], "id": "linter"}
+{"label": "CODE", "pattern": [{"LOWER": "text"}, {"LOWER": "editor"}], "id": "text-editor"}
+{"label": "CODE", "pattern": [{"LOWER": "text"}, {"IS_PUNCT": true}, {"LOWER": "editor"}], "id": "text-editor"}
+{"label": "CODE", "pattern": [{"LOWER": "coding"}, {"LOWER": "convention"}], "id": "coding-style"}
+{"label": "CODE", "pattern": [{"LOWER": "coding"}, {"LOWER": "style"}], "id": "coding-style"}
+{"label": "CODE", "pattern": [{"LOWER": "coding"}, {"LOWER": "rules"}], "id": "coding-style"}
+{"label": "CODE", "pattern": [{"LOWER": "coding"}, {"LOWER": "guidelines"}], "id": "coding-style"}
+{"label": "CODE", "pattern": [{"LOWER": "tabs"}], "id": "tabs"}
+{"label": "CODE", "pattern": [{"LOWER": "soft"}, {"LOWER": "tabs"}], "id": "tabs"}
+{"label": "CODE", "pattern": [{"LOWER": "readability"}], "id": "readability"}
+{"label": "CODE", "pattern": [{"LOWER": "maintainability"}], "id": "maintainability"}
+{"label": "CODE", "pattern": [{"LOWER": "testability"}], "id": "maintainability"}
+{"label": "CODE", "pattern": [{"LOWER": "elegance"}], "id": "elegance"}
+{"label": "CODE", "pattern": [{"LOWER": "docstring"}], "id": "docstring"}
+{"label": "CODE", "pattern": [{"LOWER": "comment"}], "id": "comment"}
+{"label": "CODE", "pattern": [{"LOWER": "library"}], "id": "library"}
+{"label": "CODE", "pattern": [{"LOWER": "module"}], "id": "module"}
+{"label": "CODE", "pattern": [{"LOWER": "function"}], "id": "function"}
+{"label": "CODE", "pattern": [{"LOWER": "method"}], "id": "method"}
+{"label": "CODE", "pattern": [{"LOWER": "variable"}], "id": "variable"}
+{"label": "CODE", "pattern": [{"LOWER": "component"}], "id": "component"}
+{"label": "CODE", "pattern": [{"LOWER": "database"}], "id": "database"}
+{"label": "CODE", "pattern": [{"LOWER": "postgres"}], "id": "database"}
+{"label": "CODE", "pattern": [{"LOWER": "mysql"}], "id": "database"}
+{"label": "CODE", "pattern": [{"LOWER": "mongodb"}], "id": "database"}
+{"label": "CODE", "pattern": [{"LOWER": "redis"}], "id": "database"}
+{"label": "CODE", "pattern": [{"LOWER": "sqlite"}], "id": "database"}
+{"label": "CODE", "pattern": [{"LOWER": "mariadb"}], "id": "database"}
+{"label": "CODE", "pattern": [{"LOWER": "python"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"LOWER": "java"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"LOWER": "ruby"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"LOWER": "javascript"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"LOWER": "php"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"TEXT": "C#"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"TEXT": "C++"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"LOWER": "typescript"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"LOWER": "shell"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"TEXT": "C"}], "id": "programming-language"}
+{"label": "CODE", "pattern": [{"LOWER": "debug"}], "id": "debug"}
+{"label": "CODE", "pattern": [{"LOWER": "sdk"}], "id": "sdk"}
+{"label": "CODE", "pattern": [{"LOWER": "jdk"}], "id": "sdk"}
+{"label": "CODE", "pattern": [{"LOWER": "software"}, {"LOWER": "development"}, {"LOWER": "kit"}], "id": "sdk"}
+{"label": "CODE", "pattern": [{"LOWER": "docker"}], "id": "docker"}
+{"label": "CODE", "pattern": [{"LOWER": "pep"}], "id": "coding-convention"}
+{"label": "CODE", "pattern": [{"LOWER": "pep"}, {"IS_PUNCT": true}, {"IS_DIGIT": true}], "id": "coding-convention"}
+{"label": "CODE", "pattern": [{"LOWER": "psr"}], "id": "coding-convention"}
+{"label": "CODE", "pattern": [{"LOWER": "psr"}, {"IS_PUNCT": true}, {"IS_DIGIT": true}], "id": "coding-convention"}
+
+{"label": "SETUP", "pattern": [{"LOWER": "tool"}], "id": "tool"}
+{"label": "SETUP", "pattern": [{"LOWER": "run"}], "id": "run"}
+{"label": "SETUP", "pattern": [{"LOWER": "package"}], "id": "package"}
+{"label": "SETUP", "pattern": [{"LOWER": "install"}], "id": "install"}
+{"label": "SETUP", "pattern": [{"LOWER": "update"}], "id": "update"}
+{"label": "SETUP", "pattern": [{"LOWER": "upgrade"}], "id": "upgrade"}
+{"label": "SETUP", "pattern": [{"LOWER": "remove"}], "id": "remove"}
+{"label": "SETUP", "pattern": [{"LOWER": "setup"}], "id": "setup"}
+{"label": "SETUP", "pattern": [{"LOWER": "configuration"}], "id": "setup"}
+{"label": "SETUP", "pattern": [{"LOWER": "dependency"}], "id": "dependency"}
+{"label": "SETUP", "pattern": [{"LOWER": "dependencies"}], "id": "dependency"}
+{"label": "SETUP", "pattern": [{"LOWER": "yarn"}], "id": "package-manager"}
+{"label": "SETUP", "pattern": [{"LOWER": "pip"}], "id": "package-manager"}
+{"label": "SETUP", "pattern": [{"LOWER": "npm"}], "id": "package-manager"}
+{"label": "SETUP", "pattern": [{"LOWER": "virtual"}, {"LOWER": "environment"}], "id": "environment"}
+{"label": "SETUP", "pattern": [{"LOWER": "source"}, {"LOWER": "code"}], "id": "source-code"}
+{"label": "SETUP", "pattern": [{"LOWER": "source"}], "id": "source-code"}
+{"label": "SETUP", "pattern": [{"LOWER": "requirement"}], "id": "requirement"}
+{"label": "SETUP", "pattern": [{"LOWER": "cd"}], "id": "shell-command"}
+{"label": "SETUP", "pattern": [{"LOWER": "mv"}], "id": "shell-command"}
+{"label": "SETUP", "pattern": [{"LOWER": "ls"}], "id": "shell-command"}
+{"label": "SETUP", "pattern": [{"LOWER": "dir"}], "id": "shell-command"}
+
+{"label": "FLOW", "pattern": [{"LOWER": "flow"}], "id": "flow"}
+{"label": "FLOW", "pattern": [{"LOWER": "contribution"}, {"LOWER": "flow"}], "id": "contribution-flow"}
+{"label": "FLOW", "pattern": [{"LOWER": "github"}], "id": "github"}
+{"label": "FLOW", "pattern": [{"LOWER": "release"}], "id": "release"}
+{"label": "FLOW", "pattern": [{"LOWER": "pull"}], "id": "pull-request"}
+{"label": "FLOW", "pattern": [{"LOWER": "pull"}, {"LOWER": "request"}], "id": "pull-request"}
+{"label": "FLOW", "pattern": [{"LOWER": "pull"}, {"IS_PUNCT": true}, {"LOWER": "request"}], "id": "pull-request"}
+{"label": "FLOW", "pattern": [{"LOWER": "clone"}], "id": "clone"}
+{"label": "FLOW", "pattern": [{"LOWER": "push"}], "id": "push"}
+{"label": "FLOW", "pattern": [{"LOWER": "merge"}], "id": "merge"}
+
+{"label": "SUBMISSION", "pattern": [{"LOWER": "changelog"}], "id": "changelog"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "ci"}], "id": "continuous-integration"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "continuous"}, {"LOWER": "integration"}], "id": "continuous-integration"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "jenkins"}], "id": "continuous-integration-tool"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "travis"}], "id": "continuous-integration-tool"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "travis"}, {"LOWER": "ci"}], "id": "continuous-integration-tool"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "circle"}, {"LOWER": "ci"}], "id": "continuous-integration-tool"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "license"}], "id": "license"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "cla"}], "id": "contributor-license-agreement"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "contributor"}, {"LOWER": "license"}, {"LOWER": "agreement"}], "id": "contributor-license-agreement"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "gnu"}], "id": "gnu"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "mit"}], "id": "mit"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "review"}], "id": "review"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "test"}], "id": "testing"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "unit"}, {"LOWER": "testing"}], "id": "testing"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "test"}, {"LOWER": "suite"}], "id": "test-suite"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "commit"}, {"LOWER": "guidelines"}], "id": "commit-guidelines"}
+{"label": "SUBMISSION", "pattern": [{"LOWER": "commit"}, {"LOWER": "message"}, {"LOWER": "guidelines"}], "id": "commit-guidelines"}

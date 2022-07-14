@@ -1,0 +1,155 @@
+,Category,Number of paragraphs,Repository,Color,Percentage
+0,No categories identified.,24.0,https://github.com/vuejs/vue,#577590,34
+1,BW – Build local workspace,9.0,https://github.com/vuejs/vue,#f9c74f,13
+2,CF – Contribution flow,3.0,https://github.com/vuejs/vue,#f94144,4
+3,SC – Submit the changes,19.0,https://github.com/vuejs/vue,#43aa8b,27
+4,DC – Deal with the code,14.0,https://github.com/vuejs/vue,#90be6d,20
+5,CT – Choose a task,0.0,https://github.com/vuejs/vue,#f3722c,0
+6,TC – Talk to the community,0.0,https://github.com/vuejs/vue,#f8961e,0
+0,DC – Deal with the code,1.0,https://github.com/facebook/react,#90be6d,33
+1,No categories identified.,2.0,https://github.com/facebook/react,#577590,66
+2,CF – Contribution flow,0.0,https://github.com/facebook/react,#f94144,0
+3,CT – Choose a task,0.0,https://github.com/facebook/react,#f3722c,0
+4,TC – Talk to the community,0.0,https://github.com/facebook/react,#f8961e,0
+5,BW – Build local workspace,0.0,https://github.com/facebook/react,#f9c74f,0
+6,SC – Submit the changes,0.0,https://github.com/facebook/react,#43aa8b,0
+0,No categories identified.,27.0,https://github.com/tensorflow/tensorflow,#577590,26
+1,SC – Submit the changes,43.0,https://github.com/tensorflow/tensorflow,#43aa8b,42
+2,CF – Contribution flow,4.0,https://github.com/tensorflow/tensorflow,#f94144,3
+3,DC – Deal with the code,21.0,https://github.com/tensorflow/tensorflow,#90be6d,20
+4,CT – Choose a task,1.0,https://github.com/tensorflow/tensorflow,#f3722c,0
+5,BW – Build local workspace,5.0,https://github.com/tensorflow/tensorflow,#f9c74f,4
+6,TC – Talk to the community,0.0,https://github.com/tensorflow/tensorflow,#f8961e,0
+0,No categories identified.,51.0,https://github.com/twbs/bootstrap,#577590,60
+1,DC – Deal with the code,7.0,https://github.com/twbs/bootstrap,#90be6d,8
+2,CF – Contribution flow,4.0,https://github.com/twbs/bootstrap,#f94144,4
+3,BW – Build local workspace,7.0,https://github.com/twbs/bootstrap,#f9c74f,8
+4,SC – Submit the changes,14.0,https://github.com/twbs/bootstrap,#43aa8b,16
+5,CT – Choose a task,1.0,https://github.com/twbs/bootstrap,#f3722c,1
+6,TC – Talk to the community,0.0,https://github.com/twbs/bootstrap,#f8961e,0
+0,No categories identified.,44.0,https://github.com/microsoft/vscode,#577590,78
+1,TC – Talk to the community,1.0,https://github.com/microsoft/vscode,#f8961e,1
+2,SC – Submit the changes,8.0,https://github.com/microsoft/vscode,#43aa8b,14
+3,DC – Deal with the code,1.0,https://github.com/microsoft/vscode,#90be6d,1
+4,BW – Build local workspace,1.0,https://github.com/microsoft/vscode,#f9c74f,1
+5,CF – Contribution flow,1.0,https://github.com/microsoft/vscode,#f94144,1
+6,CT – Choose a task,0.0,https://github.com/microsoft/vscode,#f3722c,0
+0,No categories identified.,15.0,https://github.com/golang/go,#577590,88
+1,SC – Submit the changes,2.0,https://github.com/golang/go,#43aa8b,11
+2,CF – Contribution flow,0.0,https://github.com/golang/go,#f94144,0
+3,CT – Choose a task,0.0,https://github.com/golang/go,#f3722c,0
+4,TC – Talk to the community,0.0,https://github.com/golang/go,#f8961e,0
+5,BW – Build local workspace,0.0,https://github.com/golang/go,#f9c74f,0
+6,DC – Deal with the code,0.0,https://github.com/golang/go,#90be6d,0
+0,No categories identified.,15.0,https://github.com/nodejs/node,#577590,75
+1,SC – Submit the changes,3.0,https://github.com/nodejs/node,#43aa8b,15
+2,TC – Talk to the community,1.0,https://github.com/nodejs/node,#f8961e,5
+3,BW – Build local workspace,1.0,https://github.com/nodejs/node,#f9c74f,5
+4,CF – Contribution flow,0.0,https://github.com/nodejs/node,#f94144,0
+5,CT – Choose a task,0.0,https://github.com/nodejs/node,#f3722c,0
+6,DC – Deal with the code,0.0,https://github.com/nodejs/node,#90be6d,0
+0,No categories identified.,65.0,https://github.com/angular/angular,#577590,38
+1,TC – Talk to the community,1.0,https://github.com/angular/angular,#f8961e,0
+2,SC – Submit the changes,94.0,https://github.com/angular/angular,#43aa8b,55
+3,CF – Contribution flow,2.0,https://github.com/angular/angular,#f94144,1
+4,BW – Build local workspace,3.0,https://github.com/angular/angular,#f9c74f,1
+5,DC – Deal with the code,5.0,https://github.com/angular/angular,#90be6d,2
+6,CT – Choose a task,0.0,https://github.com/angular/angular,#f3722c,0
+0,No categories identified.,165.0,https://github.com/pytorch/pytorch,#577590,38
+1,SC – Submit the changes,112.0,https://github.com/pytorch/pytorch,#43aa8b,25
+2,DC – Deal with the code,73.0,https://github.com/pytorch/pytorch,#90be6d,16
+3,BW – Build local workspace,59.0,https://github.com/pytorch/pytorch,#f9c74f,13
+4,CF – Contribution flow,23.0,https://github.com/pytorch/pytorch,#f94144,5
+5,CT – Choose a task,1.0,https://github.com/pytorch/pytorch,#f3722c,0
+6,TC – Talk to the community,0.0,https://github.com/pytorch/pytorch,#f8961e,0
+0,No categories identified.,81.0,https://github.com/juliaLang/julia,#577590,44
+1,DC – Deal with the code,30.0,https://github.com/juliaLang/julia,#90be6d,16
+2,CF – Contribution flow,4.0,https://github.com/juliaLang/julia,#f94144,2
+3,SC – Submit the changes,58.0,https://github.com/juliaLang/julia,#43aa8b,31
+4,BW – Build local workspace,10.0,https://github.com/juliaLang/julia,#f9c74f,5
+5,CT – Choose a task,0.0,https://github.com/juliaLang/julia,#f3722c,0
+6,TC – Talk to the community,0.0,https://github.com/juliaLang/julia,#f8961e,0
+0,No categories identified.,49.0,https://github.com/scala/scala,#577590,38
+1,CF – Contribution flow,5.0,https://github.com/scala/scala,#f94144,3
+2,SC – Submit the changes,52.0,https://github.com/scala/scala,#43aa8b,41
+3,DC – Deal with the code,19.0,https://github.com/scala/scala,#90be6d,15
+4,BW – Build local workspace,1.0,https://github.com/scala/scala,#f9c74f,0
+5,CT – Choose a task,0.0,https://github.com/scala/scala,#f3722c,0
+6,TC – Talk to the community,0.0,https://github.com/scala/scala,#f8961e,0
+0,No categories identified.,19.0,https://github.com/vim/vim,#577590,73
+1,SC – Submit the changes,6.0,https://github.com/vim/vim,#43aa8b,23
+2,DC – Deal with the code,1.0,https://github.com/vim/vim,#90be6d,3
+3,CF – Contribution flow,0.0,https://github.com/vim/vim,#f94144,0
+4,CT – Choose a task,0.0,https://github.com/vim/vim,#f3722c,0
+5,TC – Talk to the community,0.0,https://github.com/vim/vim,#f8961e,0
+6,BW – Build local workspace,0.0,https://github.com/vim/vim,#f9c74f,0
+0,No categories identified.,41.0,https://github.com/gohugoio/hugo,#577590,45
+1,SC – Submit the changes,32.0,https://github.com/gohugoio/hugo,#43aa8b,35
+2,TC – Talk to the community,2.0,https://github.com/gohugoio/hugo,#f8961e,2
+3,BW – Build local workspace,5.0,https://github.com/gohugoio/hugo,#f9c74f,5
+4,CT – Choose a task,1.0,https://github.com/gohugoio/hugo,#f3722c,1
+5,CF – Contribution flow,4.0,https://github.com/gohugoio/hugo,#f94144,4
+6,DC – Deal with the code,5.0,https://github.com/gohugoio/hugo,#90be6d,5
+0,No categories identified.,53.0,https://github.com/hashicorp/terraform,#577590,47
+1,TC – Talk to the community,1.0,https://github.com/hashicorp/terraform,#f8961e,0
+2,SC – Submit the changes,43.0,https://github.com/hashicorp/terraform,#43aa8b,38
+3,CF – Contribution flow,3.0,https://github.com/hashicorp/terraform,#f94144,2
+4,DC – Deal with the code,4.0,https://github.com/hashicorp/terraform,#90be6d,3
+5,CT – Choose a task,1.0,https://github.com/hashicorp/terraform,#f3722c,0
+6,BW – Build local workspace,6.0,https://github.com/hashicorp/terraform,#f9c74f,5
+0,No categories identified.,21.0,https://github.com/activeadmin/activeadmin,#577590,32
+1,CF – Contribution flow,5.0,https://github.com/activeadmin/activeadmin,#f94144,7
+2,SC – Submit the changes,21.0,https://github.com/activeadmin/activeadmin,#43aa8b,32
+3,DC – Deal with the code,3.0,https://github.com/activeadmin/activeadmin,#90be6d,4
+4,BW – Build local workspace,15.0,https://github.com/activeadmin/activeadmin,#f9c74f,23
+5,CT – Choose a task,0.0,https://github.com/activeadmin/activeadmin,#f3722c,0
+6,TC – Talk to the community,0.0,https://github.com/activeadmin/activeadmin,#f8961e,0
+0,No categories identified.,332.0,https://github.com/apache/incubator-superset,#577590,55
+1,CT – Choose a task,6.0,https://github.com/apache/incubator-superset,#f3722c,0
+2,SC – Submit the changes,116.0,https://github.com/apache/incubator-superset,#43aa8b,19
+3,DC – Deal with the code,63.0,https://github.com/apache/incubator-superset,#90be6d,10
+4,BW – Build local workspace,79.0,https://github.com/apache/incubator-superset,#f9c74f,13
+5,TC – Talk to the community,1.0,https://github.com/apache/incubator-superset,#f8961e,0
+6,CF – Contribution flow,4.0,https://github.com/apache/incubator-superset,#f94144,0
+0,No categories identified.,19.0,https://github.com/atlanhq/camelot,#577590,36
+1,TC – Talk to the community,2.0,https://github.com/atlanhq/camelot,#f8961e,3
+2,CT – Choose a task,1.0,https://github.com/atlanhq/camelot,#f3722c,1
+3,BW – Build local workspace,4.0,https://github.com/atlanhq/camelot,#f9c74f,7
+4,SC – Submit the changes,14.0,https://github.com/atlanhq/camelot,#43aa8b,26
+5,CF – Contribution flow,9.0,https://github.com/atlanhq/camelot,#f94144,17
+6,DC – Deal with the code,3.0,https://github.com/atlanhq/camelot,#90be6d,5
+0,No categories identified.,42.0,https://github.com/babel/babel,#577590,24
+1,TC – Talk to the community,4.0,https://github.com/babel/babel,#f8961e,2
+2,CT – Choose a task,2.0,https://github.com/babel/babel,#f3722c,1
+3,CF – Contribution flow,16.0,https://github.com/babel/babel,#f94144,9
+4,BW – Build local workspace,20.0,https://github.com/babel/babel,#f9c74f,11
+5,SC – Submit the changes,53.0,https://github.com/babel/babel,#43aa8b,31
+6,DC – Deal with the code,32.0,https://github.com/babel/babel,#90be6d,18
+0,No categories identified.,146.0,https://github.com/aws/aws-cdk,#577590,36
+1,SC – Submit the changes,84.0,https://github.com/aws/aws-cdk,#43aa8b,21
+2,CF – Contribution flow,15.0,https://github.com/aws/aws-cdk,#f94144,3
+3,DC – Deal with the code,114.0,https://github.com/aws/aws-cdk,#90be6d,28
+4,BW – Build local workspace,40.0,https://github.com/aws/aws-cdk,#f9c74f,10
+5,CT – Choose a task,0.0,https://github.com/aws/aws-cdk,#f3722c,0
+6,TC – Talk to the community,0.0,https://github.com/aws/aws-cdk,#f8961e,0
+0,No categories identified.,23.0,https://github.com/azkaban/azkaban,#577590,33
+1,TC – Talk to the community,1.0,https://github.com/azkaban/azkaban,#f8961e,1
+2,SC – Submit the changes,16.0,https://github.com/azkaban/azkaban,#43aa8b,23
+3,CT – Choose a task,1.0,https://github.com/azkaban/azkaban,#f3722c,1
+4,BW – Build local workspace,2.0,https://github.com/azkaban/azkaban,#f9c74f,2
+5,DC – Deal with the code,25.0,https://github.com/azkaban/azkaban,#90be6d,36
+6,CF – Contribution flow,0.0,https://github.com/azkaban/azkaban,#f94144,0
+0,No categories identified.,108.0,https://github.com/cookiecutter/cookiecutter,#577590,60
+1,CT – Choose a task,5.0,https://github.com/cookiecutter/cookiecutter,#f3722c,2
+2,SC – Submit the changes,42.0,https://github.com/cookiecutter/cookiecutter,#43aa8b,23
+3,BW – Build local workspace,7.0,https://github.com/cookiecutter/cookiecutter,#f9c74f,3
+4,CF – Contribution flow,2.0,https://github.com/cookiecutter/cookiecutter,#f94144,1
+5,DC – Deal with the code,16.0,https://github.com/cookiecutter/cookiecutter,#90be6d,8
+6,TC – Talk to the community,0.0,https://github.com/cookiecutter/cookiecutter,#f8961e,0
+0,No categories identified.,56.0,https://github.com/microsoft/typeScript,#577590,42
+1,DC – Deal with the code,21.0,https://github.com/microsoft/typeScript,#90be6d,16
+2,BW – Build local workspace,10.0,https://github.com/microsoft/typeScript,#f9c74f,7
+3,CF – Contribution flow,3.0,https://github.com/microsoft/typeScript,#f94144,2
+4,SC – Submit the changes,40.0,https://github.com/microsoft/typeScript,#43aa8b,30
+5,CT – Choose a task,1.0,https://github.com/microsoft/typeScript,#f3722c,0
+6,TC – Talk to the community,0.0,https://github.com/microsoft/typeScript,#f8961e,0
