@@ -3,6 +3,7 @@
 
 import re
 import os
+import platform
 import subprocess
 from urllib.parse import urlparse
 import classifier.scrap_github_api as scraper
@@ -134,20 +135,34 @@ def escape_markdown_from_file(project_filepath):
     this local alternative so far. I am open to suggestions!
     """
 
-    # Redefine this variable with your own filepath to cmark-gfm.exe
-    cmark_gfm_exe_path = 'C:\\Users\\fronchettl\\Documents\\cmark-gfm\\cmark-gfm-master\\build\\src\\cmark-gfm.exe'
+    if "Windows" in platform.system():
+        # Redefine this variable with your own filepath to cmark-gfm.exe
+        cmark_gfm_exe_path = 'C:\\Users\\fronchettl\\Documents\\cmark-gfm\\cmark-gfm-master\\build\\src\\cmark-gfm.exe'
 
-    if os.path.isfile(cmark_gfm_exe_path):
-        plaintext = subprocess.run([cmark_gfm_exe_path, project_filepath, '--to', 'plaintext'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+        if os.path.isfile(cmark_gfm_exe_path):
+            plaintext = subprocess.run([cmark_gfm_exe_path, project_filepath, '--to', 'plaintext'], stdout=subprocess.PIPE).stdout.decode('utf-8')
 
-        with open(project_filepath, 'w', encoding='utf-8') as project_file:
-            project_file.write(plaintext)
+            with open(project_filepath, 'w', encoding='utf-8') as project_file:
+                project_file.write(plaintext)
+        else:
+            print('Please, update the filepath to the `cmark-gfm.exe` file inside the\
+                get_contributing.py file')
+            print('If you do not have cmark-gfm installed, please visit their\
+                repository and install it: github.com/github/cmark-gfm')
+            raise Exception('The cmark-gfm.exe path is undefined')
+    elif "Linux" in platform.system():
+        try:
+            plaintext = subprocess.run(['cmark-gfm', project_filepath, '--to', 'plaintext'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+
+            with open(project_filepath, 'w', encoding='utf-8') as project_file:
+                project_file.write(plaintext)
+        except: 
+            raise Exception('There is a problem with cmark-gfm. Make sure you have it\
+                            installed on your machine.')
     else:
-        print('Please, update the filepath to the `cmark-gfm.exe` file inside the\
-               scripts/scraper/export.py file')
-        print('If you do not have cmark-gfm installed, please visit their\
-              repository and install it: github.com/github/cmark-gfm')
-        raise ValueError('The cmark-gfm.exe variable was not defined in\
-              scripts/scraper/export.py (Line 38)')
-    
+        raise Exception('At the moment, we do not support your operating system\
+                    because of our local execution of cmark-gfm. Feel free to work\
+                    on it in the get_contributing.py file, escape_markdown_from_file method.\
+                    Pull-requests are appreciated.')       
+
     return plaintext

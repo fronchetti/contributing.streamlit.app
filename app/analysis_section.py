@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-from turtle import color
 import pandas
 import collections
 import plotly.express as plotly
