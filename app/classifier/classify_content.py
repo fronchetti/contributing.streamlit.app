@@ -7,13 +7,12 @@ from urllib.error import URLError
 from classifier.get_contributing import get_contributing_file
 from classifier.get_features import convert_paragraphs_into_features
 
-@page.cache()
-def load_classification_model():
-	model = pickle.load((open('classifier/classification_model.sav', 'rb')))
+@page.cache(allow_output_mutation=True)
+def load_classification_model(filepath):
+	model = pickle.load((open(filepath, 'rb')))
 	return model
 
 def get_contributing_predictions(page, repository_url):
-
 	try:
 		if len(repository_url) > 0:
 			if 'github.com' not in repository_url:
@@ -23,7 +22,7 @@ def get_contributing_predictions(page, repository_url):
 
 			if paragraphs:
 				# Loads the classification model.
-				model = load_classification_model()
+				model = load_classification_model('classifier/classification_model.sav')
 
 				# Using the estimator, predicts the classes for the paragraphs in the file
 				predictions = model.predict(convert_paragraphs_into_features(paragraphs))

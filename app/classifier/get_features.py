@@ -12,19 +12,15 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer 
 from nltk.stem.porter import PorterStemmer
 
-@page.cache()
-def load_feature_selector():
-    selector = pickle.load(open('classifier/feature_selector.sav', 'rb'))
+@page.cache(allow_output_mutation=True)
+def load_feature_selector(filepath):
+    selector = pickle.load(open(filepath, 'rb'))
     return selector
 
-selector = load_feature_selector()
-
-@page.cache()
-def load_vectorizer():
-    vectorizer = pickle.load(open('classifier/tf-idf.sav', 'rb'))
+@page.cache(allow_output_mutation=True)
+def load_vectorizer(filepath):
+    vectorizer = pickle.load(open(filepath, 'rb'))
     return vectorizer
-
-vectorizer = load_vectorizer()
 
 def select_features(features):
     """Selects the best features to use before prediction
@@ -35,6 +31,7 @@ def select_features(features):
         Dataframe: Best features using SelectPercentile (chi-square)
     """
 
+    selector = load_feature_selector('classifier/feature_selector.sav')
     best_features = selector.transform(features)
 
     return best_features
@@ -63,6 +60,7 @@ def create_statistic_features(X):
         'analyzer': 'word',
     }
 
+    vectorizer = load_vectorizer('classifier/tf-idf.sav')
     features = vectorizer.transform(X)
     statistic_features = pandas.DataFrame(features.toarray(), columns=vectorizer.get_feature_names())
 
@@ -96,7 +94,8 @@ def create_heuristic_features(X):
     """
 
     nlp = English()
-    ruler = nlp.add_pipe("entity_ruler").from_disk('classifier/patterns.jsonl')
+    jsonl_filepath = os.path.join('classifier/patterns.jsonl')
+    ruler = nlp.add_pipe("entity_ruler").from_disk(jsonl_filepath)
 
     heuristic_features = pandas.DataFrame()
     heuristic_features['Paragraph'] = X
