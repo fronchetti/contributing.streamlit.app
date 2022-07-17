@@ -5,11 +5,26 @@ import os
 import pickle
 import string
 import pandas
+import streamlit as page
 from functools import partial
 from spacy.lang.en import English
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer 
 from nltk.stem.porter import PorterStemmer
+
+@page.cache()
+def load_feature_selector():
+    selector = pickle.load(open('classifier/feature_selector.sav', 'rb'))
+    return selector
+
+selector = load_feature_selector()
+
+@page.cache()
+def load_vectorizer():
+    vectorizer = pickle.load(open('classifier/tf-idf.sav', 'rb'))
+    return vectorizer
+
+vectorizer = load_vectorizer()
 
 def select_features(features):
     """Selects the best features to use before prediction
@@ -20,7 +35,6 @@ def select_features(features):
         Dataframe: Best features using SelectPercentile (chi-square)
     """
 
-    selector = pickle.load(open('classifier/feature_selector.sav', 'rb'))
     best_features = selector.transform(features)
 
     return best_features
@@ -49,7 +63,6 @@ def create_statistic_features(X):
         'analyzer': 'word',
     }
 
-    vectorizer = pickle.load(open('classifier/tf-idf.sav', 'rb'))
     features = vectorizer.transform(X)
     statistic_features = pandas.DataFrame(features.toarray(), columns=vectorizer.get_feature_names())
 
@@ -83,8 +96,7 @@ def create_heuristic_features(X):
     """
 
     nlp = English()
-    jsonl_filepath = os.path.join('classifier/patterns.jsonl')
-    ruler = nlp.add_pipe("entity_ruler").from_disk(jsonl_filepath)
+    ruler = nlp.add_pipe("entity_ruler").from_disk('classifier/patterns.jsonl')
 
     heuristic_features = pandas.DataFrame()
     heuristic_features['Paragraph'] = X
