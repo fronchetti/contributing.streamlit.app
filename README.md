@@ -1,2 +1,3 @@
 # contributing.info
- A website that analyses your CONTRIBUTING file
+![Example](https://github.com/fronchetti/contributing.info/blob/main/example.gif?raw=true)
+
