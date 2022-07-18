@@ -138,8 +138,8 @@ def escape_markdown_from_file(project_filepath):
 
 	if "Windows" in platform.system():
 		# Redefine this variable with your own filepath to cmark-gfm.exe
-		# cmark_gfm_exe_path = 'C:\\Users\\fronchettl\\Documents\\cmark-gfm\\cmark-gfm-master\\build\\src\\cmark-gfm.exe'
-		cmark_gfm_exe_path = 'cmark-gfm'
+		cmark_gfm_exe_path = 'C:\\Users\\fronchettl\\Documents\\cmark-gfm\\cmark-gfm-master\\build\\src\\cmark-gfm.exe'
+		# cmark_gfm_exe_path = 'cmark-gfm'
 
 		if os.path.isfile(cmark_gfm_exe_path):
 			plaintext = subprocess.run([cmark_gfm_exe_path, project_filepath, '--to', 'plaintext'], stdout=subprocess.PIPE).stdout.decode('utf-8')
