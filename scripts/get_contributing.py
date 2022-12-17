@@ -5,7 +5,7 @@ from io import StringIO
 from markdown import Markdown
 from urllib.parse import urlparse
 from urllib.error import URLError
-import classifier.scrap_github_api as scraper
+import scripts.scrap_github_api as scraper
 
 def get_contributing_file(repository_url):
     """Scraps the text in a CONTRIBUTING file of a repository hosted on GitHub.

@@ -1,12 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import pandas 
+import copy
+import pandas
+import streamlit as st
+
+@st.cache
+def get_reasons_for_exclusion():
+    return pandas.read_csv('https://github.com/fronchetti/contributing.info/blob/main/resources/reasons_for_exclusion.csv?raw=true')
 
 def write_motivation_section(page):
     page.markdown("To train a classification model capable of identifying information relevant for newcomers in CONTRIBUTING.md files, a set of projects were selected from GitHub to compose our dataset. The most popular projects from the top ten most popular languages on GitHub were selected to compose our sample. The list of programming languages included: JavaScript, Python, Java, PHP, C#, C++, TypeScript, Shell, C and Ruby.")
     page.markdown("The first evidence that not all open source projects actually support newcomers with CONTRIBUTING.md files was found during the extraction of these documentation files from GitHub. Researchers noticed that from the 9.514 projects selected for study, only 2.915 projects had a valid CONTRIBUTING.md file in their repository, about 30\% of the original dataset. Check out the table below for a complete overview of the selected projects:")
     page.markdown("**Table 1. Set of projects extracted from GitHub**")
-    reasons_for_exclusion = pandas.read_csv('reasons_for_exclusion.csv')
+    reasons_for_exclusion = copy.deepcopy(get_reasons_for_exclusion())
     page.dataframe(reasons_for_exclusion, use_container_width=True)
     page.markdown("After extracting the CONTRIBUTING.md files from the remaining 2.915 projects, researchers performed a qualitative analysis on the documentation files of 500 projects using the six categories of information known to be important for newcomers. A total of 20.733 paragraphs extracted from these projects were coded by the researchers, with 13.272 of them (64\%) being identified as part of one of the six categories of information. From the qualitative analysis, researchers found out that:")
     page.markdown("* **Most projects do not cover the six categories of information in their CONTRIBUTING.md files**")
