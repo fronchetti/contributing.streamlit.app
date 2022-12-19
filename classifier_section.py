@@ -12,6 +12,7 @@ from scripts.classify_content import get_contributing_predictions
 def get_projects():
     return pandas.read_csv('https://github.com/fronchetti/contributing.info/blob/main/resources/projects.csv?raw=true')
 
+
 def write_contributing_analysis(page, repository_url):
     paragraphs, predictions = get_contributing_predictions(page, repository_url)
 
@@ -23,72 +24,11 @@ def write_contributing_analysis(page, repository_url):
         write_project_comparison(page, predictions_per_class, repository_url)
         write_annotated_paragraphs(page, paragraphs, predictions)
 
-def write_project_comparison(page, predictions, repository_url):
-    page.write("#### Your file compared to other projects")
-
-    projects_dataframe = get_projects()
-
-    if projects_dataframe['Repository'].str.contains(repository_url).any():
-        projects_dataframe = projects_dataframe[projects_dataframe.Repository.str.contains(repository_url)]
-
-    projects_dataframe = projects_dataframe.append(predictions)
-    projects_dataframe['Repository'] = projects_dataframe.Repository.str.replace('https://' , '')
-    projects_dataframe['Repository'] = projects_dataframe.Repository.str.replace('github.com/' , '')
-
-    category_selection = page.selectbox('Choose a category of information:',
-        tuple(classes_color.keys() - ['No categories identified.']))
-
-    category_dataframe = projects_dataframe.loc[projects_dataframe['Category'] == category_selection]
-    category_dataframe = category_dataframe.sort_values(by = 'Number of paragraphs')
-    category_dataframe['Average'] = int(category_dataframe['Number of paragraphs'].mean())
-
-    repository_url = repository_url.replace('https://' , '').replace('github.com/' , '')
-    colors = {repository_url: '#ed3326'}
-    color_discrete_map = {c: colors.get(c, '#90be6d') for c in category_dataframe.Repository.unique()}
-
-    barplot = plotly.bar(category_dataframe, x = 'Repository', y = 'Number of paragraphs', color='Repository', color_discrete_map=color_discrete_map, template = 'ggplot2')
-    barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False)
-
-    page.plotly_chart(barplot, use_container_width = True)
-
-def write_overview_barplot(page, predictions):
-    barplot = plotly.bar(data_frame = predictions,
-                     x = "Number of paragraphs", 
-                     y = "Repository",
-                     color = "Category",
-                     color_discrete_map = classes_color,
-                     orientation = "h",
-                     height = 300,
-                     template = 'ggplot2')
-
-    barplot.update_layout(yaxis = {'visible': False,
-                                   'showticklabels': False},
-                          legend={'title_text': None,
-                                  'orientation': 'h',
-                                  'yanchor': 'top',
-                                  'xanchor': 'center',
-                                  'y': 1.75,
-                                  'x': 0.5},
-                          margin={'l': 20,
-                                  'r': 20,
-                                  't': 20,
-                                  'b': 20},
-                          paper_bgcolor='rgb(245, 245, 245)')
-
-    # Hide legend for categories where number of paragraphs is zero
-    for trace in barplot['data']:
-        n_paragraphs_in_class = predictions.loc[predictions['Category'] == trace['name'],
-                                'Number of paragraphs'].item()
-
-        if  n_paragraphs_in_class == 0:
-            trace['showlegend'] = False
-
-    page.plotly_chart(barplot, use_container_width = True)
 
 def write_overview_reasoning(page, predictions):
     page.write("#### How good is this CONTRIBUTING.md file?")
 
-    # Ignore the class "No categories identified"
+    # Ignore the class "No categories identified" while defining the coverage of a CONTRIBUTING.md file
     categories_predictions = predictions[predictions['Category'] != 'No categories identified.']
 
     n_existent_categories = (categories_predictions['Number of paragraphs'] > 0).sum()
@@ -96,21 +36,26 @@ def write_overview_reasoning(page, predictions):
     percentage_existent_categories = n_existent_categories / total_categories * 100
 
     if percentage_existent_categories == 100:
-        contributing_quality = 'Excellent'
+        contributing_coverage = 'Excellent'
     elif percentage_existent_categories > 83:
-        contributing_quality = 'Very Good'
+        contributing_coverage = 'Very Good'
     elif percentage_existent_categories > 66:
-        contributing_quality = 'Good'
+        contributing_coverage = 'Good'
     elif percentage_existent_categories > 50:
-        contributing_quality = 'Regular'
+        contributing_coverage = 'Regular'
     elif percentage_existent_categories > 33:
-        contributing_quality = 'Poor'
+        contributing_coverage = 'Poor'
     elif percentage_existent_categories > 0:
-        contributing_quality = 'Very Poor'
+        contributing_coverage = 'Very Poor'
     else:
-        contributing_quality = 'Undefined'
+        contributing_coverage = 'Undefined'
 
-    quality_reasonings = {
+    page.markdown("According to our classification model,\
+                the coverage of this CONTRIBUTING.md file is **{}**.".format(contributing_coverage))
+
+    write_overview_barplot(page, predictions)
+
+    coverage_reasonings = {
         'Excellent': 'It means the requested documentation file covered all the\
             six categories of information a newcomer needs to know\
             in order to contribute to an open source project. \
@@ -143,12 +88,41 @@ def write_overview_reasoning(page, predictions):
             correct and if the CONTRIBUTING.md file available in the repository is not empty."
     }
 
-    page.markdown("According to our classification model,\
-                  the quality of your CONTRIBUTING.md file is **{}**.".format(contributing_quality))
+    page.markdown("{}".format(coverage_reasonings[contributing_coverage]))
 
-    write_overview_barplot(page, predictions)
+def write_overview_barplot(page, predictions):
+    barplot = plotly.bar(data_frame = predictions,
+                     x = "Number of paragraphs", 
+                     y = "Repository",
+                     color = "Category",
+                     color_discrete_map = classes_color,
+                     orientation = "h",
+                     height = 250,
+                     template = 'ggplot2')
 
-    page.markdown("{}".format(quality_reasonings[contributing_quality]))
+    barplot.update_layout(yaxis = {'visible': False,
+                                   'showticklabels': False},
+                          legend={'title_text': None,
+                                  'orientation': 'h',
+                                  'yanchor': 'top',
+                                  'xanchor': 'center',
+                                  'y': 2.25,
+                                  'x': 0.5},
+                          margin={'l': 50,
+                                  'r': 50,
+                                  't': 80,
+                                  'b': 80},
+                          paper_bgcolor='rgb(252, 252, 252)')
+
+    # Hide legend for categories where number of paragraphs is zero
+    for trace in barplot['data']:
+        n_paragraphs_in_class = predictions.loc[predictions['Category'] == trace['name'], 'Number of paragraphs'].item()
+
+        if  n_paragraphs_in_class == 0:
+            trace['showlegend'] = False
+
+    page.plotly_chart(barplot, use_container_width = True)
+
 
 def write_dominant_categories(page, predictions):
 
@@ -193,23 +167,23 @@ def write_dominant_categories(page, predictions):
 
     dominant_categories = predictions.loc[predictions.Percentage >= 15]
     dominant_categories = dominant_categories.sort_values('Percentage', ascending = False)
-    n_weak_categories = len(dominant_categories.index)
+    n_dominant_categories = len(dominant_categories.index)
 
-    if n_weak_categories > 0:
+    if n_dominant_categories > 0:
         page.write("#### Strong categories:")
         page.markdown("The categories of information with the largest percentages of\
                 paragraphs identified in the file are:")
         
-        if 2 > n_weak_categories > 0:
+        if 2 > n_dominant_categories > 0:
             page.metric(dominant_categories['Category'].iloc[0], str(dominant_categories['Percentage'].iloc[0]) + '%')
             page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[0]])
-        elif 3 > n_weak_categories > 1:
+        elif 3 > n_dominant_categories > 1:
             column_one, column_two = page.columns(2)
             column_one.metric(dominant_categories['Category'].iloc[0], str(dominant_categories['Percentage'].iloc[0]) + '%')
             column_two.metric(dominant_categories['Category'].iloc[1], str(dominant_categories['Percentage'].iloc[1]) + '%')
             page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[0]])
             page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[1]])
-        elif n_weak_categories > 2:
+        elif n_dominant_categories > 2:
             column_one, column_two, column_three = page.columns(3)
             column_one.metric(dominant_categories['Category'].iloc[0], str(dominant_categories['Percentage'].iloc[0]) + '%')
             column_two.metric(dominant_categories['Category'].iloc[1], str(dominant_categories['Percentage'].iloc[1]) + '%')
@@ -291,6 +265,35 @@ def write_weak_categories(page, predictions):
                     in this section, we identified that your documentation file has\
                     {} categories that should be adjusted.".format(n_weak_categories))
 
+def write_project_comparison(page, predictions, repository_url):
+    page.write("#### Your file compared to other projects")
+
+    projects_dataframe = get_projects()
+
+    if projects_dataframe['Repository'].str.contains(repository_url).any():
+        projects_dataframe = projects_dataframe[projects_dataframe.Repository.str.contains(repository_url)]
+
+    projects_dataframe = projects_dataframe.append(predictions)
+    projects_dataframe['Repository'] = projects_dataframe.Repository.str.replace('https://' , '')
+    projects_dataframe['Repository'] = projects_dataframe.Repository.str.replace('github.com/' , '')
+
+    category_selection = page.selectbox('Choose a category of information:',
+        tuple(classes_color.keys() - ['No categories identified.']))
+
+    category_dataframe = projects_dataframe.loc[projects_dataframe['Category'] == category_selection]
+    category_dataframe = category_dataframe.sort_values(by = 'Number of paragraphs')
+    category_dataframe['Average'] = int(category_dataframe['Number of paragraphs'].mean())
+
+    repository_url = repository_url.replace('https://' , '').replace('github.com/' , '')
+    colors = {repository_url: '#ed3326'}
+    color_discrete_map = {c: colors.get(c, '#90be6d') for c in category_dataframe.Repository.unique()}
+
+    barplot = plotly.bar(category_dataframe, x = 'Repository', y = 'Number of paragraphs', color='Repository', color_discrete_map=color_discrete_map, template = 'ggplot2')
+    barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False)
+
+    page.plotly_chart(barplot, use_container_width = True)
+
+
 def write_annotated_paragraphs(page, paragraphs, predictions):
     with page.expander("Open document with predictions"):
         for paragraph, prediction in zip(paragraphs, predictions):
@@ -309,6 +312,7 @@ def write_annotated_paragraphs(page, paragraphs, predictions):
             if prediction.startswith('SC'):
                 annotated_text((paragraph, prediction, classes_color[prediction]))
 
+
 def count_predictions_per_class(predictions, repository_url):
     counter = collections.Counter(predictions)
 
@@ -320,6 +324,7 @@ def count_predictions_per_class(predictions, repository_url):
     dataframe = dataframe.rename(columns = {"index": "Category"})
     dataframe['Repository'] = repository_url
 
+    # Assign color to each category
     for category in classes_color.keys():
         if category not in dataframe['Category'].values:
             dataframe.loc[len(dataframe.index),
@@ -327,12 +332,14 @@ def count_predictions_per_class(predictions, repository_url):
         else:
             dataframe.loc[dataframe['Category'] == category, ['Color']] = classes_color[category]
 
+    # Calculate percentage per category
     if dataframe['Number of paragraphs'].sum() > 0:
         dataframe['Percentage'] = (dataframe['Number of paragraphs'] / dataframe['Number of paragraphs'].sum()) * 100
     else:
         dataframe['Percentage'] = 0
 
     dataframe['Percentage'] = dataframe['Percentage'].astype(int)
+
     return dataframe
 
 classes_color = {'No categories identified.': "#577590",

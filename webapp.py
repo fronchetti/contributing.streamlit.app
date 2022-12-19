@@ -8,7 +8,7 @@ from classifier_section import write_contributing_analysis
 
 page.set_page_config(
      page_title="CONTRIBUTING.info",
-     page_icon="🔸",
+     page_icon="📋",
      layout="centered",
      initial_sidebar_state="collapsed",
  )

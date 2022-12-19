@@ -38,7 +38,6 @@ class Create:
         
         try:
             session = requests.Session()
-            session.auth = ('fronchetti', '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')
             # session.auth = (os.getenv('GITHUB_USER'), os.getenv('GITHUB_TOKEN'))
             retries = Retry(total = 10)
             session.mount('https://', HTTPAdapter(max_retries=retries))
