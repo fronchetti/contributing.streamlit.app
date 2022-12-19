@@ -20,13 +20,14 @@ def write_contributing_analysis(page, repository_url):
         predictions_per_class = count_predictions_per_class(predictions, repository_url)
         write_overview_reasoning(page, predictions_per_class)
         write_dominant_categories(page, predictions_per_class)
-        write_weak_categories(page, predictions_per_class)
+        write_missing_categories(page, predictions_per_class)
         write_project_comparison(page, predictions_per_class, repository_url)
         write_annotated_paragraphs(page, paragraphs, predictions)
 
 
 def write_overview_reasoning(page, predictions):
-    page.write("#### How good is this CONTRIBUTING.md file?")
+    page.write("<hr>", unsafe_allow_html=True)
+    page.write("#### How covered is this CONTRIBUTING.md file?")
 
     # Ignore the class "No categories identified" while defining the coverage of a CONTRIBUTING.md file
     categories_predictions = predictions[predictions['Category'] != 'No categories identified.']
@@ -128,39 +129,41 @@ def write_dominant_categories(page, predictions):
 
     dominant_reasonings = {
         'CF – Contribution flow': "**Contribution flow:** Describing the flow\
-            for new contributions in your project is a great way to highlight the\
+            for new contributions in an OSS project is a great way to highlight the\
             necessary steps newcomers need to take in order to place their first\
-            contribution. Having the contribution flow in your dominant categories\
-            means that you are probably covering the basics steps of your project.\
-            However, always keep in mind that more specific topics should also be\
-            discussed in your documentation.",
+            contribution. Having the contribution flow in the dominant categories\
+            means that the CONTRIBUTING.md file is probably covering the basics steps of the project.\
+            However, maintainers need to keep in mind that more specific topics should also be\
+            discussed in the documentation file (e.g. How to choose a task).",
         'CT – Choose a task': "**Choose a task:** It is almost impossible for a\
-            newcomer to contribute to your project without knowing what tasks are\
+            newcomer to contribute to an OSS project without knowing what tasks are\
             available for external contributors. Having this as a dominant category\
-            means that you are probably showing novices what they can do in your\
-            project. However, please don't forget that describing other the aspects\
-            of your project is also important for them.",
+            means that the CONTRIBUTING.md file is probably showing to novices what they can do in\
+            the project. However, it is important ot highlight that describing other aspects\
+            of the project is also important for them (e.g. How to talk with the community).",
         'TC – Talk to the community': "**Talk to the community:** Building a solid\
             community is a primary goal for most projects in the open source context.\
-            Having this as a dominant category means that you are telling your\
-            newcomers how they can find and contact you.",
+            Having this as a dominant category means that the CONTRIBUTING.md file is telling\
+            newcomers how they can find, interact and behave in their community.",
         'BW – Build local workspace': "**Build local workspace:** Code contributions\
-            usually depend of a local workspace used during the development process.\
-            If this category is dominant, it means that you are probably describing\
-            for newcomers how they should install your software on their own machines.",
-        'DC – Deal with the code': "**Deal with the code:** Each project has its\
-            own code standards and traditions. It is important that open source\
-            projects describe for newcomers how they should deal with the code\
-            during their first contribution. Having this category among your\
-            dominants means that you care about the quality of the source code\
-            in your project.",
+            usually depend of their own local workspace to implement a contribution.\
+            If this category is dominant, it means that the CONTRIBUTING.md file is probably describing\
+            for newcomers how they should install the respective project on their own machines.\
+            Although this is an important topic for newcomers to know, other aspects should also be\
+            addressed by the project (e.g. How to dealt with the code).",
+        'DC – Deal with the code': "**Deal with the code:** Each open source project has its\
+            own standards and traditions. It is important for open source\
+            projects to describe for newcomers how they should implement their code\
+            before they place their first contribution. Having this category among the\
+            dominant categories means that the CONTRIBUTING.md file highlights the guidelines to implement code\
+            in the respective project.",
         'SC – Submit the changes': "**Submit the changes:** A contribution would\
-            not be complete without the submission of changes back to the open\
-            source project. If this category is dominant in your documentation\
-            file, it means that you are probably describing how newcomers should\
-            submit their modifications. However, keep in mind that prior steps\
-            in the contribution process should also be handled by your\
-            contributing file."}
+            not be complete without the submission of changes back to the\
+            repository. If this category is dominant in the CONTRIBUTING.md\
+            file, it means that maintainers are probably describing how newcomers should\
+            submit their contributions. However, maintainers should keep in mind that prior steps\
+            in the contribution process should also be addressed by the\
+            contributing file (e.g. How to deal with the code)."}
 
     # Ignore the class "No categories identified"
     predictions = predictions[predictions['Category'] != 'No categories identified.']
@@ -170,103 +173,154 @@ def write_dominant_categories(page, predictions):
     n_dominant_categories = len(dominant_categories.index)
 
     if n_dominant_categories > 0:
-        page.write("#### Strong categories:")
-        page.markdown("The categories of information with the largest percentages of\
-                paragraphs identified in the file are:")
+        page.write("<hr>", unsafe_allow_html=True)
+        page.write("#### Dominant categories:")
+        page.markdown("The prevalent categories of information in this CONTRIBUTING.md file are:")
         
         if 2 > n_dominant_categories > 0:
-            page.metric(dominant_categories['Category'].iloc[0], str(dominant_categories['Percentage'].iloc[0]) + '%')
-            page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[0]])
+            category = dominant_categories['Category'].iloc[0]
+            category_paragraphs = str(int(dominant_categories['Number of paragraphs'].iloc[0]))
+            category_percentage = str(dominant_categories['Percentage'].iloc[0]) + '%'
+
+            page.markdown('- ' + dominant_reasonings[category])
+            page.markdown('<p class="custom-percentage">' + category_paragraphs + ' paragraphs (' + category_percentage + ') discuss the category ' + category + ' </p>', unsafe_allow_html=True)
+
         elif 3 > n_dominant_categories > 1:
-            column_one, column_two = page.columns(2)
-            column_one.metric(dominant_categories['Category'].iloc[0], str(dominant_categories['Percentage'].iloc[0]) + '%')
-            column_two.metric(dominant_categories['Category'].iloc[1], str(dominant_categories['Percentage'].iloc[1]) + '%')
-            page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[0]])
-            page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[1]])
+            category_a = dominant_categories['Category'].iloc[0]
+            category_b = dominant_categories['Category'].iloc[1]
+            category_a_paragraphs = str(int(dominant_categories['Number of paragraphs'].iloc[0]))
+            category_b_paragraphs = str(int(dominant_categories['Number of paragraphs'].iloc[1]))
+            category_a_percentage = str(dominant_categories['Percentage'].iloc[0]) + '%'
+            category_b_percentage = str(dominant_categories['Percentage'].iloc[1]) + '%'
+
+            page.markdown('- ' + dominant_reasonings[category_a])
+            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
+
+            page.markdown('- ' + dominant_reasonings[category_b])
+            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+
         elif n_dominant_categories > 2:
-            column_one, column_two, column_three = page.columns(3)
-            column_one.metric(dominant_categories['Category'].iloc[0], str(dominant_categories['Percentage'].iloc[0]) + '%')
-            column_two.metric(dominant_categories['Category'].iloc[1], str(dominant_categories['Percentage'].iloc[1]) + '%')
-            column_three.metric(dominant_categories['Category'].iloc[2], str(dominant_categories['Percentage'].iloc[2]) + '%')
-            page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[0]])
-            page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[1]])
-            page.markdown('- ' + dominant_reasonings[dominant_categories['Category'].iloc[2]])
+            category_a = dominant_categories['Category'].iloc[0]
+            category_b = dominant_categories['Category'].iloc[1]
+            category_c = dominant_categories['Category'].iloc[2]
+            category_a_paragraphs = str(int(dominant_categories['Number of paragraphs'].iloc[0]))
+            category_b_paragraphs = str(int(dominant_categories['Number of paragraphs'].iloc[1]))
+            category_c_paragraphs = str(int(dominant_categories['Number of paragraphs'].iloc[2]))
+            category_a_percentage = str(dominant_categories['Percentage'].iloc[0]) + '%'
+            category_b_percentage = str(dominant_categories['Percentage'].iloc[1]) + '%'
+            category_c_percentage = str(dominant_categories['Percentage'].iloc[2]) + '%'
 
-def write_weak_categories(page, predictions):
+            page.markdown('- ' + dominant_reasonings[category_a])
+            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
 
-    weak_reasonings = {
-        'CF – Contribution flow': "**Contribution flow:** When\
-            joining an open source project, new contributors need to be aware of\
-            the basics steps they need to follow in order to place their first\
-            contribution. As a project maintainer, it is your task to make sure\
-            the contribution flow of your project is clearly stated in your\
-            documentation file.",
+            page.markdown('- ' + dominant_reasonings[category_b])
+            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+
+            page.markdown('- ' + dominant_reasonings[category_c])
+            page.markdown('<p class="custom-percentage">' + category_c_paragraphs + ' paragraphs (' + category_c_percentage + ') discuss the category ' + category_c + ' </p>', unsafe_allow_html=True)
+
+def write_missing_categories(page, predictions):
+
+    missing_reasonings = {
+        'CF – Contribution flow': "**Contribution flow:** When joining an open-source project, new\
+             contributors need to know the basic steps they need to follow to place their first contribution,\
+             from downloading the source code to submitting their contribution back to the project.\
+             A CONTRIBUTING.md file needs to highlight step-by-step what path newcomers must follow\
+             to get their first contribution accepted. An easy way for maintainers to do it is by\
+             creating an ordered list of steps.",
         'CT – Choose a task': "**Choose a task:** Newcomers need to know what\
-            tasks they can work on and where they can find them. As a project\
-            maintainer, you must provide instructions about where new\
-            contributors can find tasks to work on.",
+            tasks they can work on and where they can find them. A CONTRIBUTING.md file\
+            must provide instructions about where new contributors can find tasks to work on.\
+            An easy way to prepare a project to receive outside contributions is by labeling tasks that\
+            anyone could implement (See https://up-for-grabs.net/).",
         'TC – Talk to the community': "**Talk to the community:** Newcomers\
             usually need assistance from the community while placing their\
-            first contribution. Make sure your documentation file specifies\
-            where they can get in touch with the community and maintainers.",
-        'BW – Build local workspace': "**Build local workspace:** It is\
-            impossible for new contributors to work on a project without\
-            building their own workspace first. As a project maintainer, you\
-            must provide tutorials on how newcomers can install the dependencies\
-            of your project. Make sure you cover all the technical aspects\
-            and limitations of your project while writing about this category.",
-        'DC – Deal with the code': "**Deal with the code:** If you don't provide\
+            first contribution. A CONTRIBUTING.md file must specify\
+            how they can connect with the community and, more specifically, with project maintainers.\
+            Community guidelines and etiquettes are also welcomed in this category (See https://docs.github.com/en/communities).",
+        'BW – Build local workspace': "**Build local workspace:** It might be\
+            impossible for new code contributors to work on a project without\
+            building their own workspace first. A CONTRIBUTING.md file\
+            must provide information on how newcomers can install the dependencies\
+            of the project. Maintainers need to make sure it covers all the technical aspects\
+            of the project while writing about this category, including limitations.",
+        'DC – Deal with the code': "**Deal with the code:** If maintainers don't provide\
             information about how newcomers should deal with the source code\
-            of your project, they might use their own style to create their first\
+            of the project, they might use their own style to implement their first\
             contribution. This independence might delay the contribution process,\
-            requiring more effort from project maintainers. Please, make sure you\
-            clearly specify how newcomers should deal with your source code when\
-            placing a contribution.",
+            requiring more effort from newcomers and project maintainers. A CONTRIBUTING.md file\
+            must clearly specify how newcomers should deal with the source code before\
+            placing a contribution back to the repository.",
         'SC – Submit the changes': "**Submit the changes:** A contribution would\
-            not be complete without the submission of changes back to the open\
-            source project. If this category is dominant in your documentation\
-            file, it means that you are probably describing how newcomers\
-            should submit their modifications, and that is great! However,\
-            keep in mind that prior steps in the contribution process should\
-            also be handled by your contributing file."}
+            not be complete without the submission of changes back to the\
+            project. If this category is missing in the CONTRIBUTING.md\
+            file, it means that maintainers may not be describing how newcomers\
+            should submit their modifications back to the project. The CONTRIBUTING.md file\
+            must provide information about the submission process, including information\
+            about continuous integration tools, version control systems and tests."}
 
     # Ignore the class "No categories identified"
     predictions = predictions[predictions['Category'] != 'No categories identified.']
 
-    weak_categories = predictions.loc[predictions.Percentage < 15]
-    weak_categories = weak_categories.sort_values('Percentage')
-    n_weak_categories = len(weak_categories.index)
+    missing_categories = predictions.loc[predictions.Percentage < 15]
+    missing_categories = missing_categories.sort_values('Percentage')
+    n_missing_categories = len(missing_categories.index)
     
-    if n_weak_categories > 0:
-        page.write("#### Weak categories:")
-        page.markdown("The categories of information with the smallest percentages of\
-                paragraphs identified in the file are:")
+    if n_missing_categories > 0:
+        page.write("<hr>", unsafe_allow_html=True)
+        page.write("#### Missing categories:")
+        page.markdown("The categories of information missing in this CONTRIBUTING.md file are:")
         
-        if 2 > n_weak_categories > 0:
-            page.metric(weak_categories['Category'].iloc[0], str(weak_categories['Percentage'].iloc[0]) + '%')
-            page.markdown('- ' + weak_reasonings[weak_categories['Category'].iloc[0]])
-        elif 3 > n_weak_categories > 1:
-            column_one, column_two = page.columns(2)
-            column_one.metric(weak_categories['Category'].iloc[0], str(weak_categories['Percentage'].iloc[0]) + '%')
-            column_two.metric(weak_categories['Category'].iloc[1], str(weak_categories['Percentage'].iloc[1]) + '%')
-            page.markdown('- ' + weak_reasonings[weak_categories['Category'].iloc[0]])
-            page.markdown('- ' + weak_reasonings[weak_categories['Category'].iloc[1]])
-        elif n_weak_categories > 2:
-            column_one, column_two, column_three = page.columns(3)
-            column_one.metric(weak_categories['Category'].iloc[0], str(weak_categories['Percentage'].iloc[0]) + '%')
-            column_two.metric(weak_categories['Category'].iloc[1], str(weak_categories['Percentage'].iloc[1]) + '%')
-            column_three.metric(weak_categories['Category'].iloc[2], str(weak_categories['Percentage'].iloc[2]) + '%')
-            page.markdown('- ' + weak_reasonings[weak_categories['Category'].iloc[0]])
-            page.markdown('- ' + weak_reasonings[weak_categories['Category'].iloc[1]])
-            page.markdown('- ' + weak_reasonings[weak_categories['Category'].iloc[2]])
+        if 2 > n_missing_categories > 0:
+            category = missing_categories['Category'].iloc[0]
+            category_paragraphs = str(int(missing_categories['Number of paragraphs'].iloc[0]))
+            category_percentage = str(missing_categories['Percentage'].iloc[0]) + '%'
+
+            page.markdown('- ' + missing_reasonings[category])
+            page.markdown('<p class="custom-percentage">' + category_paragraphs + ' paragraphs (' + category_percentage + ') discuss the category ' + category + ' </p>', unsafe_allow_html=True)
+
+        elif 3 > n_missing_categories > 1:
+            category_a = missing_categories['Category'].iloc[0]
+            category_b = missing_categories['Category'].iloc[1]
+            category_a_paragraphs = str(int(missing_categories['Number of paragraphs'].iloc[0]))
+            category_b_paragraphs = str(int(missing_categories['Number of paragraphs'].iloc[1]))
+            category_a_percentage = str(missing_categories['Percentage'].iloc[0]) + '%'
+            category_b_percentage = str(missing_categories['Percentage'].iloc[1]) + '%'
+
+            page.markdown('- ' + missing_reasonings[category_a])
+            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
+
+            page.markdown('- ' + missing_reasonings[category_b])
+            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+
+        elif n_missing_categories > 2:
+            category_a = missing_categories['Category'].iloc[0]
+            category_b = missing_categories['Category'].iloc[1]
+            category_c = missing_categories['Category'].iloc[2]
+            category_a_paragraphs = str(int(missing_categories['Number of paragraphs'].iloc[0]))
+            category_b_paragraphs = str(int(missing_categories['Number of paragraphs'].iloc[1]))
+            category_c_paragraphs = str(int(missing_categories['Number of paragraphs'].iloc[2]))
+            category_a_percentage = str(missing_categories['Percentage'].iloc[0]) + '%'
+            category_b_percentage = str(missing_categories['Percentage'].iloc[1]) + '%'
+            category_c_percentage = str(missing_categories['Percentage'].iloc[2]) + '%'
+
+            page.markdown('- ' + missing_reasonings[category_a])
+            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
+
+            page.markdown('- ' + missing_reasonings[category_b])
+            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+
+            page.markdown('- ' + missing_reasonings[category_c])
+            page.markdown('<p class="custom-percentage">' + category_c_paragraphs + ' paragraphs (' + category_c_percentage + ') discuss the category ' + category_c + ' </p>', unsafe_allow_html=True)
     
-            if n_weak_categories > 3:
+            if n_missing_categories > 3:
                 page.error("Although just three categories of information are highlighted\
-                    in this section, we identified that your documentation file has\
-                    {} categories that should be adjusted.".format(n_weak_categories))
+                    in this section, we identified that this CONTRIBUTING.md file has other\
+                    {} categories that should be adjusted.".format(n_missing_categories - 3))
 
 def write_project_comparison(page, predictions, repository_url):
-    page.write("#### Your file compared to other projects")
+    page.write("<hr>", unsafe_allow_html=True)
+    page.write("#### This file compared to other projects")
 
     projects_dataframe = get_projects()
 

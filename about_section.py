@@ -4,8 +4,8 @@
 def write_about_section(page):
 
     page.markdown("Retaining new contributors is essential for the longevity\
-                    of open-source projects. To better receive newcomers,\
-                    open source projects tend to provide [CONTRIBUTING.md](https://mozillascience.github.io/working-open-workshop/contributing/) files\
+                    of open source projects. To better receive newcomers,\
+                    open source projects tend to provide a [CONTRIBUTING.md](https://mozillascience.github.io/working-open-workshop/contributing/) file\
                     in their repositories, a type of documentation file considered as a primary source of documentation for outsiders. Although these files\
                     may be essential for new contributors, related studies have shown that not all projects\
                     provide the necessary information about the contribution process in their CONTRIBUTING.md files.")
@@ -102,6 +102,12 @@ def write_about_section(page):
             <i>"Pull requests are the only way of pushing your code to the master branch.<br>\
                 When creating a PR make sure you choose a short but sensical PR title and add<br>\
                 a few lines describing your contribution."</i></p>', unsafe_allow_html=True)
+
+    page.markdown('For paragraphs where no category is identified, a seventh category named as "No categories identified" is assigned by the classifier.')
+
+    page.markdown('<p class="custom-page-title">The classification process</p>', unsafe_allow_html=True)
+    page.markdown("A brief illustration of how our tool works is given below:")
+    page.image('https://github.com/fronchetti/contributing.info/blob/main/resources/contributing.info.png?raw=true')
 
     page.markdown('<p class="custom-page-title">Learn more</p>', unsafe_allow_html=True)
 

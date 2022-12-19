@@ -47,6 +47,13 @@ page.markdown(
     * {
         font-size: 20px !important;
     }
+
+    hr {
+        border: 1px solid #d1d1d1;
+        border-radius: 5px;
+        padding: 0px !important;
+        margin: 0px !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
