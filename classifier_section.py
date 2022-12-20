@@ -168,7 +168,7 @@ def write_dominant_categories(page, predictions):
     # Ignore the class "No categories identified"
     predictions = predictions[predictions['Category'] != 'No categories identified.']
 
-    dominant_categories = predictions.loc[predictions.Percentage >= 15]
+    dominant_categories = predictions.loc[predictions.Percentage >= 10]
     dominant_categories = dominant_categories.sort_values('Percentage', ascending = False)
     n_dominant_categories = len(dominant_categories.index)
 
@@ -243,7 +243,7 @@ def write_missing_categories(page, predictions):
             building their own workspace first. A CONTRIBUTING.md file\
             must provide information on how newcomers can install the dependencies\
             of the project. Maintainers need to make sure it covers all the technical aspects\
-            of the project while writing about this category, including limitations.",
+            of the project while writing about this category, including hardware and software limitations (e.g. portability issues).",
         'DC – Deal with the code': "**Deal with the code:** If maintainers don't provide\
             information about how newcomers should deal with the source code\
             of the project, they might use their own style to implement their first\
@@ -262,7 +262,7 @@ def write_missing_categories(page, predictions):
     # Ignore the class "No categories identified"
     predictions = predictions[predictions['Category'] != 'No categories identified.']
 
-    missing_categories = predictions.loc[predictions.Percentage < 15]
+    missing_categories = predictions.loc[predictions.Percentage < 10]
     missing_categories = missing_categories.sort_values('Percentage')
     n_missing_categories = len(missing_categories.index)
     
