@@ -39,6 +39,27 @@ page.markdown(
         background-color: #ebebeb;
     }
 
+    .container-dominant { 
+        padding: 15px;
+        text-align: center;
+        border-radius: 5px;
+        background-color: #d7e8d5;
+    }
+
+    .container-missing { 
+        padding: 15px;
+        text-align: center;
+        border-radius: 5px;
+        background-color: #e8cbc8;
+    }
+
+    .container-warning { 
+        padding: 15px;
+        text-align: center;
+        border-radius: 5px;
+        background-color: #e3e3e3;
+    }
+
     a { 
         color: #47809e !important;
         text-decoration: none;

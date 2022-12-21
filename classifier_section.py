@@ -27,7 +27,7 @@ def write_contributing_analysis(page, repository_url):
 
 def write_overview_reasoning(page, predictions):
     page.write("<hr>", unsafe_allow_html=True)
-    page.write("#### How covered is this CONTRIBUTING.md file?")
+    page.markdown('<p class="custom-page-title">How covered is this CONTRIBUTING.md file?</p>', unsafe_allow_html=True)
 
     # Ignore the class "No categories identified" while defining the coverage of a CONTRIBUTING.md file
     categories_predictions = predictions[predictions['Category'] != 'No categories identified.']
@@ -62,7 +62,7 @@ def write_overview_reasoning(page, predictions):
             in order to contribute to an open source project. \
             For a more detailed explanation, please read the analysis below.',
         'Very Good': 'It means five out of six categories of\
-            information known to be relevant to newcomers were identified in the documentation.\
+            information known to be relevant to newcomers were identified in this documentation file.\
             To make the file more receptive to new contributors, maintainers need to make sure\
             that the CONTRIBUTING.md covers all the six categories of information.\
             A detailed analysis about this file is provided below.',
@@ -124,6 +124,13 @@ def write_overview_barplot(page, predictions):
 
     page.plotly_chart(barplot, use_container_width = True)
 
+def check_plural(phrase, n_paragraphs):
+    if int(n_paragraphs) == 0:
+        return phrase.replace('0 paragraphs (0%) discuss', 'No paragraphs discusses')
+    if int(n_paragraphs) == 1:
+        return phrase.replace('1 paragraphs', '1 paragraph').replace('discuss', 'discusses')
+    else:
+        return phrase
 
 def write_dominant_categories(page, predictions):
 
@@ -174,7 +181,7 @@ def write_dominant_categories(page, predictions):
 
     if n_dominant_categories > 0:
         page.write("<hr>", unsafe_allow_html=True)
-        page.write("#### Dominant categories:")
+        page.markdown('<p class="custom-page-title">Dominant categories</p>', unsafe_allow_html=True)
         page.markdown("The prevalent categories of information in this CONTRIBUTING.md file are:")
         
         if 2 > n_dominant_categories > 0:
@@ -183,7 +190,7 @@ def write_dominant_categories(page, predictions):
             category_percentage = str(dominant_categories['Percentage'].iloc[0]) + '%'
 
             page.markdown('- ' + dominant_reasonings[category])
-            page.markdown('<p class="custom-percentage">' + category_paragraphs + ' paragraphs (' + category_percentage + ') discuss the category ' + category + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-dominant">' + category_paragraphs + ' paragraphs (' + category_percentage + ') discuss the category ' + category + ' </p>', category_paragraphs), unsafe_allow_html=True)
 
         elif 3 > n_dominant_categories > 1:
             category_a = dominant_categories['Category'].iloc[0]
@@ -194,10 +201,10 @@ def write_dominant_categories(page, predictions):
             category_b_percentage = str(dominant_categories['Percentage'].iloc[1]) + '%'
 
             page.markdown('- ' + dominant_reasonings[category_a])
-            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-dominant">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', category_a_paragraphs), unsafe_allow_html=True)
 
             page.markdown('- ' + dominant_reasonings[category_b])
-            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-dominant">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', category_b_paragraphs), unsafe_allow_html=True)
 
         elif n_dominant_categories > 2:
             category_a = dominant_categories['Category'].iloc[0]
@@ -211,13 +218,13 @@ def write_dominant_categories(page, predictions):
             category_c_percentage = str(dominant_categories['Percentage'].iloc[2]) + '%'
 
             page.markdown('- ' + dominant_reasonings[category_a])
-            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-dominant">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', category_a_paragraphs), unsafe_allow_html=True)
 
             page.markdown('- ' + dominant_reasonings[category_b])
-            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-dominant">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', category_b_paragraphs), unsafe_allow_html=True)
 
             page.markdown('- ' + dominant_reasonings[category_c])
-            page.markdown('<p class="custom-percentage">' + category_c_paragraphs + ' paragraphs (' + category_c_percentage + ') discuss the category ' + category_c + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-dominant">' + category_c_paragraphs + ' paragraphs (' + category_c_percentage + ') discuss the category ' + category_c + ' </p>', category_c_paragraphs), unsafe_allow_html=True)
 
 def write_missing_categories(page, predictions):
 
@@ -268,7 +275,7 @@ def write_missing_categories(page, predictions):
     
     if n_missing_categories > 0:
         page.write("<hr>", unsafe_allow_html=True)
-        page.write("#### Missing categories:")
+        page.markdown('<p class="custom-page-title">Missing categories</p>', unsafe_allow_html=True)
         page.markdown("The categories of information missing in this CONTRIBUTING.md file are:")
         
         if 2 > n_missing_categories > 0:
@@ -277,7 +284,7 @@ def write_missing_categories(page, predictions):
             category_percentage = str(missing_categories['Percentage'].iloc[0]) + '%'
 
             page.markdown('- ' + missing_reasonings[category])
-            page.markdown('<p class="custom-percentage">' + category_paragraphs + ' paragraphs (' + category_percentage + ') discuss the category ' + category + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-missing">' + category_paragraphs + ' paragraphs (' + category_percentage + ') discuss the category ' + category + ' </p>', category_paragraphs), unsafe_allow_html=True)
 
         elif 3 > n_missing_categories > 1:
             category_a = missing_categories['Category'].iloc[0]
@@ -288,10 +295,10 @@ def write_missing_categories(page, predictions):
             category_b_percentage = str(missing_categories['Percentage'].iloc[1]) + '%'
 
             page.markdown('- ' + missing_reasonings[category_a])
-            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-missing">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', category_a_paragraphs), unsafe_allow_html=True)
 
             page.markdown('- ' + missing_reasonings[category_b])
-            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-missing">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', category_b_paragraphs), unsafe_allow_html=True)
 
         elif n_missing_categories > 2:
             category_a = missing_categories['Category'].iloc[0]
@@ -305,22 +312,22 @@ def write_missing_categories(page, predictions):
             category_c_percentage = str(missing_categories['Percentage'].iloc[2]) + '%'
 
             page.markdown('- ' + missing_reasonings[category_a])
-            page.markdown('<p class="custom-percentage">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-missing">' + category_a_paragraphs + ' paragraphs (' + category_a_percentage + ') discuss the category ' + category_a + ' </p>', category_a_paragraphs), unsafe_allow_html=True)
 
             page.markdown('- ' + missing_reasonings[category_b])
-            page.markdown('<p class="custom-percentage">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-missing">' + category_b_paragraphs + ' paragraphs (' + category_b_percentage + ') discuss the category ' + category_b + ' </p>', category_b_paragraphs), unsafe_allow_html=True)
 
             page.markdown('- ' + missing_reasonings[category_c])
-            page.markdown('<p class="custom-percentage">' + category_c_paragraphs + ' paragraphs (' + category_c_percentage + ') discuss the category ' + category_c + ' </p>', unsafe_allow_html=True)
+            page.markdown(check_plural('<p class="container-missing">' + category_c_paragraphs + ' paragraphs (' + category_c_percentage + ') discuss the category ' + category_c + ' </p>', category_c_paragraphs), unsafe_allow_html=True)
     
             if n_missing_categories > 3:
-                page.error("Although just three categories of information are highlighted\
+                page.markdown('<p class="container-warning"> Although just three categories of information are highlighted\
                     in this section, we identified that this CONTRIBUTING.md file has other\
-                    {} categories that should be adjusted.".format(n_missing_categories - 3))
+                    {} categories that should be adjusted.</p>'.format(n_missing_categories - 3), unsafe_allow_html=True)
 
 def write_project_comparison(page, predictions, repository_url):
     page.write("<hr>", unsafe_allow_html=True)
-    page.write("#### This file compared to other projects")
+    page.markdown('<p class="custom-page-title">This file compared to other projects:</p>', unsafe_allow_html=True)
 
     projects_dataframe = get_projects()
 
