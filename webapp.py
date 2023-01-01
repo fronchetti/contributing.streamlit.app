@@ -50,7 +50,7 @@ page.markdown(
         padding: 15px;
         text-align: center;
         border-radius: 5px;
-        background-color: #d9a89c;
+        background-color: #d9a89c ;
     }
 
     .container-warning { 

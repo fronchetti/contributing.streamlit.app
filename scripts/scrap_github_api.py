@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import requests
 from datetime import datetime
 from urllib3.util.retry import Retry
@@ -37,7 +38,7 @@ class Create:
         
         try:
             session = requests.Session()
-            # session.auth = (os.getenv('GITHUB_USER'), os.getenv('GITHUB_TOKEN'))
+            session.auth = (os.getenv('GITHUB_USER'), os.getenv('GITHUB_TOKEN'))
             retries = Retry(total = 10)
             session.mount('https://', HTTPAdapter(max_retries=retries))
             response = session.get(url, params=parameters, headers=headers)

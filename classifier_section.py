@@ -325,6 +325,7 @@ def write_missing_categories(page, predictions):
                     in this section, we identified that this CONTRIBUTING.md file has other\
                     {} categories that should be adjusted.</p>'.format(n_missing_categories - 3), unsafe_allow_html=True)
 
+
 def write_project_comparison(page, predictions):
     page.write("<hr>", unsafe_allow_html=True)
     page.markdown('<p class="custom-page-title">This file compared to other projects:</p>', unsafe_allow_html=True)
