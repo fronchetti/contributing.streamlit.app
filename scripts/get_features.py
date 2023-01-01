@@ -8,8 +8,11 @@ import streamlit as st
 from functools import partial
 from nltk.corpus import stopwords
 from spacy.lang.en import English
+import nltk
 from nltk.stem import WordNetLemmatizer 
 from nltk.stem.porter import PorterStemmer
+
+nltk.download('stopwords')
 
 @st.cache(allow_output_mutation=True)
 def get_feature_selector():
