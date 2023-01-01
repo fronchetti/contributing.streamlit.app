@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import copy
 import pandas
 import streamlit as st
 from urllib.error import URLError

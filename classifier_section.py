@@ -8,7 +8,7 @@ import plotly.express as plotly
 from annotated_text import annotated_text
 from scripts.classify_content import get_contributing_predictions
 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def get_projects():
     return pandas.read_csv('https://github.com/fronchetti/contributing.info/blob/main/resources/projects.csv?raw=true', encoding='cp1252')
 
@@ -331,14 +331,13 @@ def write_project_comparison(page, predictions, repository_url):
 
     projects_dataframe = get_projects()
     print(projects_dataframe)
+    print(predictions)
 
-    selected_category = page.selectbox('Choose a category of information:',
-        tuple(classes_color.keys()))
-    selected_category = '# ' + selected_category
-    print(selected_category)
+    selected_category = page.selectbox('Choose a category of information:', tuple(classes_color.keys()))
+    sorted_dataframe = projects_dataframe.sort_values(by=[selected_category], ascending=True)
 
-    barplot = plotly.bar(projects_dataframe, x = 'Spreadsheet', y = selected_category, color='Spreadsheet', template = 'ggplot2')
-    barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False)
+    barplot = plotly.bar(sorted_dataframe, x = 'Repository', y = selected_category, color=selected_category, template = 'ggplot2')
+    barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False, yaxis_title='# Paragraphs')
     page.plotly_chart(barplot, use_container_width = True)
 
 

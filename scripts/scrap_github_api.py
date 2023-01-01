@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 import requests
 from datetime import datetime
 from urllib3.util.retry import Retry
@@ -42,7 +41,6 @@ class Create:
             retries = Retry(total = 10)
             session.mount('https://', HTTPAdapter(max_retries=retries))
             response = session.get(url, params=parameters, headers=headers)
-            
             self.verify_rate_limit(response.headers)
 
             if response.status_code != 200:
