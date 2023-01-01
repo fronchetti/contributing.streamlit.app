@@ -401,12 +401,12 @@ def count_predictions_per_class(predictions, repository_url):
 
     return dataframe
 
-classes_color = {'No categories identified.': "#577590",
-    'CF – Contribution flow': "#f94144",
-    'CT – Choose a task': "#f3722c",
-    'TC – Talk to the community': "#f8961e",
-    'BW – Build local workspace': "#f9c74f",
-    'DC – Deal with the code': "#90be6d",
-    'SC – Submit the changes': "#43aa8b"}
+classes_color = {'No categories identified.': "#264653",
+    'CF – Contribution flow': "#287271",
+    'CT – Choose a task': "#2a9d8f",
+    'TC – Talk to the community': "#8ab17d",
+    'BW – Build local workspace': "#e9c46a",
+    'DC – Deal with the code': "#f4a261",
+    'SC – Submit the changes': "#e76f51"}
 
 percentage = lambda part, whole: int(part / whole * 100)

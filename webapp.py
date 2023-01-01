@@ -43,14 +43,14 @@ page.markdown(
         padding: 15px;
         text-align: center;
         border-radius: 5px;
-        background-color: #d7e8d5;
+        background-color: #b6cfae;
     }
 
     .container-missing { 
         padding: 15px;
         text-align: center;
         border-radius: 5px;
-        background-color: #e8cbc8;
+        background-color: #d9a89c;
     }
 
     .container-warning { 
