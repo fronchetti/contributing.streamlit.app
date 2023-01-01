@@ -21,7 +21,7 @@ def write_contributing_analysis(page, repository_url):
         write_overview_reasoning(page, predictions_per_class)
         write_dominant_categories(page, predictions_per_class)
         write_missing_categories(page, predictions_per_class)
-        write_project_comparison(page, predictions_per_class, repository_url)
+        write_project_comparison(page, predictions_per_class)
         write_annotated_paragraphs(page, paragraphs, predictions)
 
 
@@ -325,19 +325,31 @@ def write_missing_categories(page, predictions):
                     in this section, we identified that this CONTRIBUTING.md file has other\
                     {} categories that should be adjusted.</p>'.format(n_missing_categories - 3), unsafe_allow_html=True)
 
-def write_project_comparison(page, predictions, repository_url):
+def write_project_comparison(page, predictions):
     page.write("<hr>", unsafe_allow_html=True)
     page.markdown('<p class="custom-page-title">This file compared to other projects:</p>', unsafe_allow_html=True)
 
     projects_dataframe = get_projects()
-    print(projects_dataframe)
-    print(predictions)
 
     selected_category = page.selectbox('Choose a category of information:', tuple(classes_color.keys()))
-    sorted_dataframe = projects_dataframe.sort_values(by=[selected_category], ascending=True)
+
+    sorted_dataframe = projects_dataframe.sample(frac=0.01)
+    sorted_dataframe = sorted_dataframe.sort_values(by=[selected_category], ascending=True)
+    # Include an empty value to isolate the project from the rest
+    empty_row = {'Repository': '', selected_category: 0}
+    sorted_dataframe = sorted_dataframe.append(empty_row, ignore_index=True)
+
+    # Get values from project
+    project_name = (predictions['Repository'].iloc[0]).replace('github.com/', '')
+    project_value = predictions.loc[predictions['Category'] == selected_category, 'Number of paragraphs'].iloc[0]
+    project_row = {'Repository': project_name, selected_category: project_value}
+    sorted_dataframe = sorted_dataframe.append(project_row, ignore_index=True)
 
     barplot = plotly.bar(sorted_dataframe, x = 'Repository', y = selected_category, color=selected_category, template = 'ggplot2')
-    barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False, yaxis_title='# Paragraphs')
+    barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False, yaxis_title='# Paragraphs', font_color='black')
+    barplot.update_coloraxes(showscale=False)
+    barplot.update_xaxes(tickangle=45)
+    page.markdown('This file has ' + str(int(project_value)) + ' paragraphs in the category ' + selected_category + '. The mean of the following sample for this category is ' + str(int(sorted_dataframe[selected_category].mean())) + '.')
     page.plotly_chart(barplot, use_container_width = True)
 
 
