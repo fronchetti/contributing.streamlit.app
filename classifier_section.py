@@ -349,7 +349,7 @@ def write_project_comparison(page, predictions):
     barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False, yaxis_title='# Paragraphs', font_color='black')
     barplot.update_coloraxes(showscale=False)
     barplot.update_xaxes(tickangle=45)
-    page.markdown('This file has ' + str(int(project_value)) + ' paragraphs in the category ' + selected_category + '. The mean of the following sample for this category is ' + str(int(sorted_dataframe[selected_category].mean())) + '.')
+    page.markdown('This file has ' + str(int(project_value)) + ' paragraphs in the category ' + selected_category + '. The average of the following sample for this category is ' + str(int(sorted_dataframe[selected_category].mean())) + '.')
     page.plotly_chart(barplot, use_container_width = True)
 
 
