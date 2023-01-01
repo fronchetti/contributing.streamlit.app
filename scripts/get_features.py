@@ -13,6 +13,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
 
 nltk.download('stopwords')
+nltk.download('wordnet')
 
 @st.cache(allow_output_mutation=True)
 def get_feature_selector():
