@@ -10,7 +10,7 @@ from scripts.classify_content import get_contributing_predictions
 
 @st.cache
 def get_projects():
-    return pandas.read_csv('https://github.com/fronchetti/contributing.info/blob/main/resources/projects.csv?raw=true')
+    return pandas.read_csv('https://github.com/fronchetti/contributing.info/blob/main/resources/projects.csv?raw=true', encoding='cp1252')
 
 
 def write_contributing_analysis(page, repository_url):
@@ -152,9 +152,9 @@ def write_dominant_categories(page, predictions):
             community is a primary goal for most projects in the open source context.\
             Having this as a dominant category means that the CONTRIBUTING.md file is telling\
             newcomers how they can find, interact and behave in their community.",
-        'BW – Build local workspace': "**Build local workspace:** Code contributions\
+        'BW – Build local workspace': "**Build local workspace:** Contributors\
             usually depend of their own local workspace to implement a contribution.\
-            If this category is dominant, it means that the CONTRIBUTING.md file is probably describing\
+            If this category is dominant, it means that the CONTRIBUTING.md file is describing\
             for newcomers how they should install the respective project on their own machines.\
             Although this is an important topic for newcomers to know, other aspects should also be\
             addressed by the project (e.g. How to dealt with the code).",
@@ -330,28 +330,15 @@ def write_project_comparison(page, predictions, repository_url):
     page.markdown('<p class="custom-page-title">This file compared to other projects:</p>', unsafe_allow_html=True)
 
     projects_dataframe = get_projects()
+    print(projects_dataframe)
 
-    if projects_dataframe['Repository'].str.contains(repository_url).any():
-        projects_dataframe = projects_dataframe[projects_dataframe.Repository.str.contains(repository_url)]
+    selected_category = page.selectbox('Choose a category of information:',
+        tuple(classes_color.keys()))
+    selected_category = '# ' + selected_category
+    print(selected_category)
 
-    projects_dataframe = projects_dataframe.append(predictions)
-    projects_dataframe['Repository'] = projects_dataframe.Repository.str.replace('https://' , '')
-    projects_dataframe['Repository'] = projects_dataframe.Repository.str.replace('github.com/' , '')
-
-    category_selection = page.selectbox('Choose a category of information:',
-        tuple(classes_color.keys() - ['No categories identified.']))
-
-    category_dataframe = projects_dataframe.loc[projects_dataframe['Category'] == category_selection]
-    category_dataframe = category_dataframe.sort_values(by = 'Number of paragraphs')
-    category_dataframe['Average'] = int(category_dataframe['Number of paragraphs'].mean())
-
-    repository_url = repository_url.replace('https://' , '').replace('github.com/' , '')
-    colors = {repository_url: '#ed3326'}
-    color_discrete_map = {c: colors.get(c, '#90be6d') for c in category_dataframe.Repository.unique()}
-
-    barplot = plotly.bar(category_dataframe, x = 'Repository', y = 'Number of paragraphs', color='Repository', color_discrete_map=color_discrete_map, template = 'ggplot2')
+    barplot = plotly.bar(projects_dataframe, x = 'Spreadsheet', y = selected_category, color='Spreadsheet', template = 'ggplot2')
     barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False)
-
     page.plotly_chart(barplot, use_container_width = True)
 
 
