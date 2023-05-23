@@ -82,7 +82,7 @@ page.markdown(
 
 page.markdown('<p class="custom-page-header">CONTRIBUTING.info</p>', unsafe_allow_html=True)
 
-about, motivation, classifier = page.tabs(["About", "Motivation", "Classifier"])
+classifier, about, motivation = page.tabs(["Classifier", "Categories", "Motivation"])
 
 with about:
     write_about_section(page)
