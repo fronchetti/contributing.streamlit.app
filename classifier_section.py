@@ -336,15 +336,21 @@ def write_project_comparison(page, predictions):
 
     sorted_dataframe = projects_dataframe.sample(frac=0.01)
     sorted_dataframe = sorted_dataframe.sort_values(by=[selected_category], ascending=True)
-    # Include an empty value to isolate the project from the rest
-    project_row = {'Repository': '', selected_category: 0}
-    sorted_dataframe = pandas.concat([sorted_dataframe, pandas.DataFrame(project_row.values(), columns=sorted_dataframe.columns)], ignore_index=True)
 
     # Get values from project
     project_name = (predictions['Repository'].iloc[0]).replace('github.com/', '')
     project_value = predictions.loc[predictions['Category'] == selected_category, 'Number of paragraphs'].iloc[0]
-    project_row = {'Repository': project_name, selected_category: project_value}
-    sorted_dataframe = pandas.concat([sorted_dataframe, pandas.DataFrame(project_row.values(), columns=sorted_dataframe.columns)], ignore_index=True)
+
+    project_values = []
+    for column in list(sorted_dataframe):
+        if column == 'Repository':
+            project_values.append(project_name)
+        elif column == selected_category:
+            project_values.append(project_value)
+        else:
+            project_values.append(None)
+
+    sorted_dataframe.loc[len(sorted_dataframe.index)] = project_values
 
     barplot = plotly.bar(sorted_dataframe, x = 'Repository', y = selected_category, color=selected_category, template = 'ggplot2')
     barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False, yaxis_title='# Paragraphs', font_color='black')
