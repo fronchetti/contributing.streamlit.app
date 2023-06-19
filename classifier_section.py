@@ -10,7 +10,7 @@ from scripts.classify_content import get_contributing_predictions
 
 @st.cache(allow_output_mutation=True)
 def get_projects():
-    return pandas.read_csv('https://github.com/fronchetti/contributing.info/blob/main/resources/projects.csv?raw=true', encoding='cp1252')
+    return pandas.read_csv('https://raw.githubusercontent.com/fronchetti/contributing.info/main/resources/projects.csv', encoding='cp1252')
 
 
 def write_contributing_analysis(page, repository_url):
