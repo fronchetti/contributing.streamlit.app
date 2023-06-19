@@ -338,13 +338,13 @@ def write_project_comparison(page, predictions):
     sorted_dataframe = sorted_dataframe.sort_values(by=[selected_category], ascending=True)
     # Include an empty value to isolate the project from the rest
     empty_row = {'Repository': '', selected_category: 0}
-    sorted_dataframe = pandas.concat([sorted_dataframe, empty_row], ignore_index=True)
+    sorted_dataframe = sorted_dataframe.append(empty_row, ignore_index=True)
 
     # Get values from project
     project_name = (predictions['Repository'].iloc[0]).replace('github.com/', '')
     project_value = predictions.loc[predictions['Category'] == selected_category, 'Number of paragraphs'].iloc[0]
     project_row = {'Repository': project_name, selected_category: project_value}
-    sorted_dataframe = pandas.concat([sorted_dataframe, project_row], ignore_index=True)
+    sorted_dataframe = sorted_dataframe.append(project_row, ignore_index=True)
 
     barplot = plotly.bar(sorted_dataframe, x = 'Repository', y = selected_category, color=selected_category, template = 'ggplot2')
     barplot.update_layout(paper_bgcolor='rgb(245, 245, 245)', showlegend=False, yaxis_title='# Paragraphs', font_color='black')
