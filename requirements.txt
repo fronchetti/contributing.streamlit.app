@@ -102,7 +102,6 @@ pyzmq==22.3.0
 regex==2021.7.6
 requests==2.25.1
 rich==12.4.4
-richdem==0.3.4
 rope==0.19.0
 s3transfer==0.6.0
 scikit-learn==1.0.2
