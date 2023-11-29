@@ -34,3 +34,4 @@ def write_motivation_section(page):
 
     page.markdown("For more detailed information about our study and the classifier, please read our paper:")
     page.markdown('<p class="custom-container">https://www.ime.usp.br/~gerosa/papers/FSE2023_Fronchetti.pdf<p>', unsafe_allow_html=True)
+    page.markdown('<p class="custom-container">Replication Package: https://github.com/fronchetti/FSE-2023<p>', unsafe_allow_html=True)
