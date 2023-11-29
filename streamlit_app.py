@@ -7,7 +7,7 @@ from motivation_section import write_motivation_section
 from classifier_section import write_contributing_analysis
 
 page.set_page_config(
-     page_title="CONTRIBUTING.info",
+     page_title="CONTRIBUTING.md",
      page_icon="📋",
      layout="centered",
      initial_sidebar_state="collapsed",
@@ -80,7 +80,7 @@ page.markdown(
     unsafe_allow_html=True,
 )
 
-page.markdown('<p class="custom-page-header">CONTRIBUTING.info</p>', unsafe_allow_html=True)
+page.markdown('<p class="custom-page-header">Evalute your CONTRIBUTING.md file here!</p>', unsafe_allow_html=True)
 
 classifier, about, motivation = page.tabs(["Classifier", "Categories", "Motivation"])
 
@@ -92,7 +92,7 @@ with motivation:
 
 with classifier:
     repository_url = page.text_input("What GitHub repository would you like to\
-                 analyse?", help="The URL must refer to a public repository hosted on GitHub with a CONTRIBUTING.md file.", 
+                 analyze?", help="The URL must refer to a public repository hosted on GitHub with a CONTRIBUTING.md file.", 
                  placeholder="https://github.com/github/docs/", max_chars=2048)
 
     with page.spinner("Parsing documentation file..."):
