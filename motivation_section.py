@@ -33,4 +33,4 @@ def write_motivation_section(page):
     page.markdown("🎯 Click on the classifier tab available on the navigation bar to try out our tool!")
 
     page.markdown("For more detailed information about our study and the classifier, please read our paper:")
-    page.markdown('<p class="custom-container">(unavailable due double-blind review policy)<p>', unsafe_allow_html=True)
+    page.markdown('<p class="custom-container">https://www.ime.usp.br/~gerosa/papers/FSE2023_Fronchetti.pdf<p>', unsafe_allow_html=True)
