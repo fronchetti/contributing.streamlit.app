@@ -80,7 +80,7 @@ page.markdown(
     unsafe_allow_html=True,
 )
 
-page.markdown('<p class="custom-page-header"><b>contributing.streamlit.app</b></p>', unsafe_allow_html=True)
+#page.markdown('<p class="custom-page-header"><b>contributing.streamlit.app</b></p>', unsafe_allow_html=True)
 
 classifier, about, motivation = page.tabs(["Classifier", "Categories", "Motivation"])
 
