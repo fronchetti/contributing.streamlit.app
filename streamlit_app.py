@@ -7,7 +7,7 @@ from motivation_section import write_motivation_section
 from classifier_section import write_contributing_analysis
 
 page.set_page_config(
-     page_title="CONTRIBUTING.md",
+     page_title="contributing.streamlit.app",
      page_icon="📋",
      layout="centered",
      initial_sidebar_state="collapsed",
@@ -80,7 +80,7 @@ page.markdown(
     unsafe_allow_html=True,
 )
 
-page.markdown('<p class="custom-page-header">Evalute your CONTRIBUTING.md file here!</p>', unsafe_allow_html=True)
+page.markdown('<p class="custom-page-header"><b>contributing.streamlit.app</b></p>', unsafe_allow_html=True)
 
 classifier, about, motivation = page.tabs(["Classifier", "Categories", "Motivation"])
 
