@@ -112,4 +112,5 @@ def write_about_section(page):
     page.markdown('<p class="custom-page-title">Learn more</p>', unsafe_allow_html=True)
 
     page.markdown("For more information about the implementation of our classifier, please read our paper:")
-    page.markdown('<p class="custom-container">(unavailable due double-blind review policy)<p>', unsafe_allow_html=True)
+    page.markdown('<p class="custom-container">https://www.ime.usp.br/~gerosa/papers/FSE2023_Fronchetti.pdf<p>', unsafe_allow_html=True)
+    page.markdown('<p class="custom-container">Replication Package: https://github.com/fronchetti/FSE-2023<p>', unsafe_allow_html=True)
